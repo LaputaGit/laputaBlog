@@ -1,2 +1,2 @@
 # laputaBlog
-基于node的播客项目
+基于node的博客类项目
