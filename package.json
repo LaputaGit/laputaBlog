@@ -1,0 +1,27 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "description": "基于node的播客项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LaputaGit/laputaBlog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LaputaGit/laputaBlog/issues"
+  },
+  "homepage": "https://github.com/LaputaGit/laputaBlog#readme",
+  "devDependencies": {
+    "body-parser": "^1.17.1",
+    "cookies": "^0.7.0",
+    "express": "^4.15.2",
+    "markdown": "^0.5.0",
+    "mongoose": "^4.9.1",
+    "swig": "^1.4.2"
+  }
+}
