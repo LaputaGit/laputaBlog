@@ -3,7 +3,7 @@
  */
 var express = require('express');
 var router = express.Router();
-var User = require('../modules/User');  // 返回一个构造函数，通过这个对象下面的方法，操作数据库
+var User = require('../models/User');  // 返回一个构造函数，通过这个对象下面的方法，操作数据库
 
 // 统一返回格式
 var responseData;
@@ -118,6 +118,15 @@ router.post('/user/login', function (req, res, next) {
                 // 登录成功
                 responseData.code = 5;
                 responseData.message = '登录成功';
+                responseData.userInfo = {
+                    _id: userInfo._id,
+                    username: username
+                };
+                // 发送cookie至浏览器
+                req.cookies.set('userInfo', JSON.stringify({
+                    _id: userInfo._id,
+                    username: userInfo.username
+                }));
                 res.json(responseData);
                 return;
             }

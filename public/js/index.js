@@ -59,16 +59,19 @@ $(function() {
             },
             dataType: 'json',
             success: function(result) {
+                if (result.code == 5) {
+                    $loginBox.find('.colWarning').html(result.message);
+                    $loginBox.hide();
+                    $userInfo.show();
+                    $userInfo.find('.username').text(result.userInfo.username);
+                    $userInfo.find('.info').text(result.userInfo.info);
 
-                $loginBox.find('.colWarning').html(result.message);
-
-                if (!result.code) {
                     //登录成功
                     window.location.reload();
                 }
             }
         })
-    })
+    });
 
     //退出
     $('#logout').on('click', function() {

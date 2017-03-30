@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block main %}
+<ol class="breadcrumb">
+    <li><a href="/">分类首页</a></li>
+    <li><span>博客分类</span></li>
+</ol>
+
+<h3>博客分类</h3>
+
+<table class="table table-hover table-striped">
+
+    <tr>
+        <th>ID</th>
+        <th>用户名</th>
+        <th>密码</th>
+        <th>是否是管理员</th>
+    </tr>
+
+    <!--{% for user in users %}-->
+    <!--<tr>-->
+        <!--<td>{{user._id.toString()}}</td>-->
+        <!--<td>{{user.username}}</td>-->
+        <!--<td>{{user.password}}</td>-->
+        <!--<td>-->
+            <!--{%if user.isAdmin%}是{%endif%}-->
+        <!--</td>-->
+    <!--</tr>-->
+    <!--{% endfor %}-->
+
+</table>
+
+<!--模板的包含 ：引用此模板时，要确定此页面接受到了相关数据-->
+<!--{% include 'page.html' %}-->
+{% endblock %}

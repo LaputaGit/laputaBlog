@@ -10,8 +10,13 @@ var mongoose = require('mongoose');
 // 加载body-parser,用来处理前端提交过来的数据
 var bodyParser = require('body-parser');
 
+// 加载cookies模块
+var Cookies = require('cookies');
+
 // 创建app应用 => nodejs http.createserver();即是服务端对象
 var app = express();
+
+var User = require('./models/User');
 
 // 配置模板 - express配置
 // 第一个参数，模板引擎的名称，同时也是模板文件的后缀，第二个参数，表示处理模板内容的方法
@@ -26,6 +31,36 @@ swig.setDefaults({cache: false});
 
 // bodyParser配置
 app.use(bodyParser.urlencoded({extended: true}));
+
+// cookies配置
+app.use(function (req, res, next) {
+   req.cookies = new Cookies(req, res);
+
+   // 是否是管理员的判断(isAdmin字段)，不要放到cookies中
+
+    // 大部分很多请求都需要用到登录信息,解析cookie信息（字符串 -> 对象）
+    req.userInfo = {};
+   if (req.cookies.get('userInfo')) {
+       try {
+            req.userInfo = JSON.parse(req.cookies.get('userInfo'));
+
+            // 获取当前登录用户的类型，是否是管理员
+            User.findById(req.userInfo._id).then(function (userInfo) {
+                req.userInfo.isAdmin = Boolean(userInfo.isAdmin);
+                next();
+            })
+
+
+       } catch(e) {
+           next();
+       }
+   } else {
+       next();
+   }
+
+   // console.log(req.cookies.get('userInfo')); // string 需要解析为对象
+
+});
 
 
 app.set('views', './views'); // 存放模板文件的目录
